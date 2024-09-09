@@ -1,32 +1,66 @@
-# Prerequisites
-*.d
+#include <iostream>
+#include<string>
+#include<cstdlib>//its used for exit function
+using namespace std;
+class library{
+    public:
+    int id;
+    char name[100];
+    char student[100];
+    char author[100];
+    int price;
+    int pages;
+    
+};
 
-# Compiled Object files
-*.slo
-*.lo
-*.o
-*.obj
+int main()
+{
+    library lib[20];//lib[20] is used to specify how many entries maximum u can add
+    int input=0;
+    int count=0;
+    while(input!=3){
+        cout<<"enter 1 to input details like id,name,author,student,price,pages"<<endl;
+        cout<<"enter 2 ot display"<<endl;
+        cout<<"enter 3 to quit";
+        cin>>input;
+        switch(input){
+            case 1:
+            cout<<"enter book id"<<endl;
+            
+            cin>>lib[count].id;
+            cin.ignore();
+            cout<<"enter book name"<<endl;
+            cin.getline(lib[count].name,100);
+            cout<<"enter book author"<<endl;
+            cin.getline(lib[count].author,100);
+            cout<<"enter student name"<<endl;
+            cin.getline(lib[count].student,100);
+            cout<<"enter book price"<<endl;
+            cin>>lib[count].price;
+            cin.ignore();
+            cout<<"enter book pages"<<endl;
+            cin>>lib[count].pages;
+            cin.ignore();
+            count++;
+            break;
+            case 2:
+            for(int i=0;i<count;i++){
+                cout<<lib[i].id<<" ";
+                cout<<lib[i].name<<" ";//delimiter already moves to next line thus no need to use endl while printing
+                cout<<lib[i].author<<" ";
+                cout<<lib[i].price<<" ";
+                cout<<lib[i].pages<<endl;
+                
+                
+            }
+            break;
+            case 3:
+            exit(0);
+            break;
+            default:
+            cout<<"you have entered wrong value pls type again";
+        }
+    }
 
-# Precompiled Headers
-*.gch
-*.pch
-
-# Compiled Dynamic libraries
-*.so
-*.dylib
-*.dll
-
-# Fortran module files
-*.mod
-*.smod
-
-# Compiled Static libraries
-*.lai
-*.la
-*.a
-*.lib
-
-# Executables
-*.exe
-*.out
-*.app
+    return 0;
+}
