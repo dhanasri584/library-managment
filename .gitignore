@@ -160,3 +160,163 @@ int main() {
 
     return 0;
 }
+3)it can also be used in string 
+#include <iostream>
+#include<sstream>
+#include<vector>
+#include<string>
+using namespace std;
+class library{
+    public:
+    int id;
+    string name;
+    string student;
+    string author;
+    int price;
+    int pages;
+    
+};
+
+
+int main()
+{
+    vector<library> lib;
+    int input=0;
+    while(input!=3){
+        cout << "Enter 1 to input details" << endl;
+        cout << "Enter 2 to display" << endl;
+        cout << "Enter 3 to quit" << endl;
+        cin >> input;
+        cin.ignore();
+        switch(input){
+            case 1:
+            if(lib.size()<20){
+            
+            string buffer;
+            cout<<"pls enter ur details";
+            getline(cin,buffer);
+            stringstream ss(buffer);
+            string token;
+            library newbook;
+            getline(ss,token,'$');
+            newbook.id=stoi(token);
+            getline(ss,token,'$');
+            newbook.name=token;
+            getline(ss,token,'$');
+            newbook.author=token;
+            getline(ss,token,'$');
+            newbook.price=stoi(token);
+            getline(ss,token,'$');
+            newbook.pages=stoi(token);
+            
+            lib.push_back(newbook);
+            }
+            else{
+                cout<<"oops library is full";
+            }
+            break;
+            case 2:
+            for(const auto&book : lib){
+                cout << "Book ID: " << book.id << endl;
+                cout << "Book Name: " << book.name << endl;
+                cout << "Book Author: " << book.author << endl;
+                cout << "Book Price: " << book.price << endl;
+                cout << "Book Pages: " << book.pages << endl;
+                cout << "----";
+            }
+        }
+    }
+    
+    return 0;
+}
+4)other way is to store the 2) wala type using vector it becomes much easier
+#include <iostream>
+#include<cstring>
+#include<cstdlib>
+#include<vector>
+
+using namespace std;
+class library{
+    public:
+    int id;
+    char name[100];
+    char student[100];
+    char author[100];
+    int price;
+    int pages;
+};
+
+
+int main(){
+   vector<library> lib;
+   int input=0;
+   int count=0;
+   while(input!=3){
+       cout<<"enter 1 to input details"<<endl;
+       cout<<"enter 2 to display"<<endl;
+       cout<<"enter 3 to quit"<<endl;
+       cin>>input;
+       cin.ignore();
+       
+       switch(input){
+           case 1:
+           if(count<20){
+               library news;
+               cout<<"enter the details in format id$name$author$price$pages"<<endl;
+               cout<<"use delimiter between fields"<<endl;
+               char buffer[500];
+               cout<<"enter book details";
+               cin.getline(buffer,500);
+               char *token=strtok(buffer,"$");
+               if (token!=nullptr){
+                   news.id=atoi(token);
+               }
+                 token=strtok(nullptr,"$");
+                if (token!=nullptr){
+                   strncpy(news.name,token,sizeof(lib[count].name)-1);
+                   news.name[sizeof(lib[count].name)-1]='\0';
+               }
+                token=strtok(nullptr,"$");
+               if(token!=nullptr){
+                   strncpy(news.author,token,sizeof(news.author)-1);
+                   news.author[sizeof(lib[count].author)-1]='\0';
+                   
+               }
+               token=strtok(nullptr,"$");
+               if (token!=nullptr){
+                   news.price=atoi(token);
+               }
+               token=strtok(nullptr,"$");
+               if (token!=nullptr){
+                   news.pages=atoi(token);
+               }
+                
+               lib.push_back(news);
+           }
+           
+           else{
+               cout<<"library is full";
+           }
+           break;
+           case 2:
+           for (const auto &book:lib) {
+                    cout << "Book ID: " << book.id << endl;
+                    cout << "Book Name: " <<book.name << endl;
+                    cout << "Book Author: " << book.author << endl;
+                    cout << "Book Price: " << book.price << endl;
+                    cout << "Book Pages: " << book.pages << endl;
+                    cout << "-----------------------" << endl;
+                }
+                break;
+            case 3:
+            exit(0);
+            break;
+             default:
+                cout << "You have entered a wrong value. Please try again." << endl;
+       }
+       
+   }
+
+    return 0;
+}
+
