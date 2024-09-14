@@ -102,7 +102,7 @@ int main() {
 
                     char buffer[500];
                     cout << "Enter book details: ";
-                    cin.getline(buffer, 500);
+                    cin.getline(buffer, 500);//should put cin>>buffer cause if u want spaces in diffrent variable it wont be able to print as cin ends when a white space occurs
 
                     // Tokenize the input buffer using '$' as the delimiter
                     char* token = strtok(buffer, "$");
